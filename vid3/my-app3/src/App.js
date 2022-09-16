@@ -1,12 +1,26 @@
 // import logo from './logo.svg';
 // import './App.css';
 import Todo from './components/Todo';
+import Counter from './components/Counter';
+import {useState} from 'react';
 
 function App(props) {
+  const [name, setName] = useState("");
+
+  function handleChange(e){
+    setName(e.target.value); // Update the local state
+    // console.log(e.target.value);
+  }
+
+  function handleSubmit(e){
+    e.preventDefault();
+    console.log(name);
+  }
+
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
-      <form>
+      <form onSubmit = {handleSubmit}>
         <h2 className="label-wrapper">
           <label htmlFor="new-todo-input" className="label__lg">
             What needs to be done?
@@ -18,6 +32,8 @@ function App(props) {
           className="input input__lg"
           name="text"
           autoComplete="off"
+          value = {name}
+          onChange = {handleChange}
         />
         <button type="submit" className="btn btn__primary btn__lg">
           Add
@@ -40,6 +56,7 @@ function App(props) {
           <span className="visually-hidden"> tasks</span>
         </button>
       </div>
+      <Counter />
       <h2 id="list-heading">
         3 tasks remaining
       </h2>
